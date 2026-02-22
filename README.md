@@ -1,55 +1,54 @@
 # Florence Nightingale's Rose Diagram — A Replication
 
-![Rose Diagram](walkthrough/output%20_image.png)
+![Logo](assets/logo.png)
 
 ## The Story
-Florence Nightingale's Rose Diagram is a landmark in the history of data visualization, created to persuade the British government to improve sanitary conditions in military hospitals. During the Crimean War, she observed that most soldiers died not from battle wounds, but from preventable infectious diseases. This diagram revolutionized the perception of public health, proving that visually presented data has the power to drive profound policy changes.
+
+The Crimean War presented a devastating sanitary reform crisis where more soldiers were dying from preventable infections than from battle wounds. To communicate this urgency to officials, Florence Nightingale developed the "Rose Diagram," a groundbreaking polar area chart that made the invisible causes of mortality impossible to ignore. This visualization ultimately revolutionized British military policy and laid the foundation for modern evidence-based healthcare practices.
 
 ## How the Data Was Collected
-To replicate this diagram, I developed a Digitization App using Python and Matplotlib to extract data from the original image nightin.jpg. 
 
-* Precision: The application allows for high-precision navigation through scroll-to-zoom and pan features.
-* Methodology: Enabled the selection of (x, y) pixel coordinates for each of the 72 data points (24 months x 3 categories).
-* Persistence: Data was captured in real-time and saved to CSV to ensure zero data loss.
+I built a Python app that let me click 4 key points on each month in Nightingale's original diagram image. The app saved these pixel coordinates as a JSON file to ensure accuracy. I then used Python to convert those coordinates into radii and proportional areas for different causes of death, making the historical data ready for modern visualization.
 
 ## The Math and Visualization
-* Radii Calculation: Distances from the center to the clicked coordinates determine the radius (r).
-* Area Proportionality: The area of each wedge is proportional to r squared, ensuring visual accuracy relative to mortality numbers.
-* Categorization:
-    * Blue: Preventable Zymotic diseases
-    * Red: Wounds
-    * Black: Other causes
 
-## User Manual and Interactive Controls
-The application includes a specialized control system for efficient digitizing:
+-   **Distance to Radii**: I used the distances from the center of the diagram to compute the radii for each wedge.
+-   **Area Proportionality**: The areas of the wedges are proportional to $r^2$, ensuring the visual impact matches the actual data.
+-   **Encoding Causes**: Each wedge encodes deaths from three different causes: preventable diseases, wounds, and other causes.
 
-| Action | Control | Description |
-| :--- | :--- | :--- |
-| Record | Left Click | Capture coordinates for the current month and category. |
-| Zoom | Scroll Wheel | Zoom in/out at the current cursor position for precision. |
-| Pan | Right Click + Drag | Move the image while zoomed in to navigate the chart. |
-| Undo | 'z' Key | Delete the last recorded point and return to the previous step. |
-| Skip | 's' Key | Skip a category (records as 'N/A') if data is missing or not visible. |
+## The Visualization
+
+![Rose Diagram](output/nightingale_rose.png)
 
 ## Key Insights
-* Before Reforms: The massive area of preventable deaths (blue) significantly outweighs deaths from actual battlefield wounds.
-* After Reforms: The dramatic reduction in the diagram's area proves the life-saving impact of sanitary improvements.
-* Personal Observation: Manually digitizing these points highlighted the meticulous care Nightingale took in her original 1858 research and the complexity of her data classification.
+
+-   The left diagram (before reforms) reveals that preventable "zymotic" diseases were the leading cause of death, far exceeding deaths from actual combat.
+-   The right diagram (after reforms) shows a dramatic reduction in the size of the wedges, illustrating how much mortality fell after sanitary improvements.
+-   This visualization demonstrates that data-driven policy change happens when complex statistics are transformed into a clear, persuasive visual narrative.
+-   **Extra Observation**: It is striking how the blue areas (infectious diseases) almost disappear in the final months compared to the start of the war.
 
 ## Technical Details
-* Language: Python 3
-* Libraries: matplotlib, pandas, Pillow, numpy
-* Core Files:
-    * your_application.py: The digitizer tool with custom event handling.
-    * nightingale_progress.csv: Resulting dataset containing 72 digitized points.
-    * nightin.jpg: Original historical source image.
+
+-   **Language**: Python
+-   **Libraries**: `matplotlib`, `pandas`, `numpy`, `json`
+-   **Files**:
+    -   `src/digitize_app.py`
+    -   `src/plot_rose.py`
+    -   `data/coordinates.json`
+    -   `data/nightingale_computed.csv`
 
 ## How to Run
-1. Clone the repository.
-2. Install dependencies:  
-   pip install -r requirements.txt
-3. Run the application:  
-   python your_application.py
+
+1.  **Clone** this repository to your local machine.
+2.  **Create and activate** a virtual environment.
+3.  **Install requirements** (if you have a `requirements.txt`).
+4.  **Run the plotting script**: `python src/plot_rose.py`
 
 ## What I Learned
-Creating this app was a significant technical journey. While building the core features was straightforward, the real challenge lay in debugging the interactive event handlers for the zoom, pan, and undo functions. I am proud of the final result—a functional tool that successfully bridges the gap between historical print and modern digital data.
+
+Through this project, I learned the technical challenge of extracting structured data from a 150-year-old image using Python and coordinate math. I also realized that data visualization is a bridge between raw numbers and social change, showing how a single chart can influence government policy to save lives.
+
+## References
+
+-   Nightingale, F. (1858). *Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army*.
+-   [Add your extra source links here]
