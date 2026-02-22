@@ -18,7 +18,7 @@ I built a Python app that let me click 4 key points on each month in Nightingale
 
 ## The Visualization
 
-![Rose Diagram](walkthrough/nightingale_rose.png)
+![Rose Diagram](walkthrough/output_image.png)
 
 ## Key Insights
 
